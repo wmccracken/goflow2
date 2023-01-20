@@ -20,6 +20,7 @@ import (
 	// import various transports
 	"github.com/netsampler/goflow2/transport"
 	_ "github.com/netsampler/goflow2/transport/file"
+	_ "github.com/netsampler/goflow2/transport/influxdb"
 	_ "github.com/netsampler/goflow2/transport/kafka"
 
 	"github.com/netsampler/goflow2/utils"
