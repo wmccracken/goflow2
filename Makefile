@@ -122,6 +122,8 @@ package-arch: prepare
         --architecture $(ARCH) \
         --license "$(LICENSE) "\
         --package $(DIST_DIR) \
+        --directories "/usr/share/goflow2" \
         $(OUTPUT)=/usr/bin/goflow2 \
-        package/goflow2.service=/lib/systemd/system/goflow2.service \
-        package/goflow2.env=/etc/default/goflow2
+        package/goflow2.service=/usr/lib/systemd/system/goflow2.service \
+        package/goflow2.env=/etc/default/goflow2 \
+        package/goflow2.conf=/etc/goflow2.conf
