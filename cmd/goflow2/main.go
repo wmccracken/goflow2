@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"flag"
 	"fmt"
+	"github.com/jnovack/flag"
 	"net/http"
 	"net/url"
 	"os"
@@ -32,6 +32,8 @@ var (
 	version    = ""
 	buildinfos = ""
 	AppVersion = "GoFlow2 " + version + " " + buildinfos
+
+	_ = flag.String(flag.DefaultConfigFlagname, "", "path to config file")
 
 	ReusePort       = flag.Bool("reuseport", false, "Enable so_reuseport")
 	ListenAddresses = flag.String("listen", "sflow://:6343,netflow://:2055", "listen addresses")

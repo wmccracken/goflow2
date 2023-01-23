@@ -5,6 +5,8 @@ go 1.18
 require (
 	github.com/Shopify/sarama v1.30.1
 	github.com/golang/protobuf v1.5.2
+	github.com/influxdata/influxdb-client-go/v2 v2.12.1
+	github.com/jnovack/flag v1.16.0
 	github.com/libp2p/go-reuseport v0.1.0
 	github.com/oschwald/geoip2-golang v1.5.0
 	github.com/prometheus/client_golang v1.11.0
@@ -25,7 +27,6 @@ require (
 	github.com/eapache/queue v1.1.0 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/hashicorp/go-uuid v1.0.2 // indirect
-	github.com/influxdata/influxdb-client-go/v2 v2.12.1 // indirect
 	github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839 // indirect
 	github.com/jcmturner/aescts/v2 v2.0.0 // indirect
 	github.com/jcmturner/dnsutils/v2 v2.0.0 // indirect
