@@ -1,8 +1,8 @@
 package common
 
 import (
-	"flag"
 	"fmt"
+	"github.com/jnovack/flag"
 	"reflect"
 	"strings"
 	"sync"

@@ -1,7 +1,7 @@
 package common
 
 import (
-	"flag"
+	"github.com/jnovack/flag"
 	"strings"
 	"sync"
 )

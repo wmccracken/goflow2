@@ -2,9 +2,9 @@ package protobuf
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"github.com/golang/protobuf/proto"
+	"github.com/jnovack/flag"
 	"github.com/netsampler/goflow2/format"
 	"github.com/netsampler/goflow2/format/common"
 )

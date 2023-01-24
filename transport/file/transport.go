@@ -2,8 +2,8 @@ package file
 
 import (
 	"context"
-	"flag"
 	"fmt"
+	"github.com/jnovack/flag"
 	"github.com/netsampler/goflow2/transport"
 	"io"
 	"os"

@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"flag"
 	"fmt"
+	"github.com/jnovack/flag"
 	"net/http"
 	"net/url"
 	"os"
@@ -20,6 +20,7 @@ import (
 	// import various transports
 	"github.com/netsampler/goflow2/transport"
 	_ "github.com/netsampler/goflow2/transport/file"
+	_ "github.com/netsampler/goflow2/transport/influxdb"
 	_ "github.com/netsampler/goflow2/transport/kafka"
 
 	"github.com/netsampler/goflow2/utils"
@@ -31,6 +32,8 @@ var (
 	version    = ""
 	buildinfos = ""
 	AppVersion = "GoFlow2 " + version + " " + buildinfos
+
+	_ = flag.String(flag.DefaultConfigFlagname, "", "path to config file")
 
 	ReusePort       = flag.Bool("reuseport", false, "Enable so_reuseport")
 	ListenAddresses = flag.String("listen", "sflow://:6343,netflow://:2055", "listen addresses")

@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/binary"
-	"flag"
 	"fmt"
 	"io"
 	"net"
@@ -13,6 +12,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/jnovack/flag"
 	"github.com/oschwald/geoip2-golang"
 
 	"github.com/golang/protobuf/proto"
@@ -27,6 +27,7 @@ import (
 	// import various transports
 	"github.com/netsampler/goflow2/transport"
 	_ "github.com/netsampler/goflow2/transport/file"
+	_ "github.com/netsampler/goflow2/transport/influxdb"
 	_ "github.com/netsampler/goflow2/transport/kafka"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -37,6 +38,8 @@ var (
 	version    = ""
 	buildinfos = ""
 	AppVersion = "Enricher " + version + " " + buildinfos
+
+	_ = flag.String(flag.DefaultConfigFlagname, "", "path to config file")
 
 	DbAsn     = flag.String("db.asn", "", "IP->ASN database")
 	DbCountry = flag.String("db.country", "", "IP->Country database")

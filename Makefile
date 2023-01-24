@@ -17,7 +17,7 @@ DESCRIPTION   := GoFlow2: Open-Source and Scalable Network Sample Collector
 DATE          :=  $(shell date +%FT%T%z)
 BUILDINFOS    ?=  ($(DATE)$(BUILDINFOSDET))
 LDFLAGS       ?= '-X main.version=$(VERSION) -X main.buildinfos=$(BUILDINFOS)'
-MAINTAINER    := lspgn@users.noreply.github.com
+MAINTAINER    := wmccracken@users.noreply.github.com
 DOCKER_BIN    ?= docker
 DOCKER_CMD    ?= build
 DOCKER_SUFFIX ?= 
@@ -112,3 +112,18 @@ package-rpm: prepare
         $(OUTPUT)=/usr/bin/goflow2 \
         package/goflow2.service=/lib/systemd/system/goflow2.service \
         package/goflow2.env=/etc/default/goflow2
+
+.PHONY: package-arch
+package-arch: prepare
+	fpm -s dir -t pacman -n $(NAME) -v $(VERSION_PKG) \
+        --maintainer "$(MAINTAINER)" \
+        --description "$(DESCRIPTION)" \
+        --url "$(URL)" \
+        --architecture $(ARCH) \
+        --license "$(LICENSE) "\
+        --package $(DIST_DIR) \
+        --directories "/usr/share/goflow2" \
+        $(OUTPUT)=/usr/bin/goflow2 \
+        package/goflow2.service=/usr/lib/systemd/system/goflow2.service \
+        package/goflow2.env=/etc/default/goflow2 \
+        package/goflow2.conf=/etc/goflow2.conf
