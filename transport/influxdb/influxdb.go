@@ -138,16 +138,16 @@ func (d *InfluxDbDriver) Send(key, data []byte) error {
 		AddField("mpls_label_ip", fmsg["MplsLabelIp"].([]interface{})).
 		AddField("observation_domain_id", int64(fmsg["ObservationDomainId"].(float64))).
 		AddField("observation_point_id", int64(fmsg["ObservationPointId"].(float64))).
-		AddField("custom_int_1", int64(fmsg["CustomInteger_1"].(float64))).
-		AddField("custom_int_2", int64(fmsg["CustomInteger_2"].(float64))).
-		AddField("custom_int_3", int64(fmsg["CustomInteger_3"].(float64))).
-		AddField("custom_int_4", int64(fmsg["CustomInteger_4"].(float64))).
-		AddField("custom_int_5", int64(fmsg["CustomInteger_5"].(float64))).
-		AddField("custom_bytes_1", fmsg["CustomBytes_1"].([]interface{})).
-		AddField("custom_bytes_2", fmsg["CustomBytes_2"].([]interface{})).
-		AddField("custom_bytes_3", fmsg["CustomBytes_3"].([]interface{})).
-		AddField("custom_bytes_4", fmsg["CustomBytes_4"].([]interface{})).
-		AddField("custom_bytes_5", fmsg["CustomBytes_5"].([]interface{})).
+		//AddField("custom_int_1", int64(fmsg["CustomInteger_1"].(float64))).
+		//AddField("custom_int_2", int64(fmsg["CustomInteger_2"].(float64))).
+		//AddField("custom_int_3", int64(fmsg["CustomInteger_3"].(float64))).
+		//AddField("custom_int_4", int64(fmsg["CustomInteger_4"].(float64))).
+		//AddField("custom_int_5", int64(fmsg["CustomInteger_5"].(float64))).
+		//AddField("custom_bytes_1", fmsg["CustomBytes_1"].([]interface{})).
+		//AddField("custom_bytes_2", fmsg["CustomBytes_2"].([]interface{})).
+		//AddField("custom_bytes_3", fmsg["CustomBytes_3"].([]interface{})).
+		//AddField("custom_bytes_4", fmsg["CustomBytes_4"].([]interface{})).
+		//AddField("custom_bytes_5", fmsg["CustomBytes_5"].([]interface{})).
 		SetTime(time.Unix(int64(fmsg["TimeReceived"].(float64)), 0))
 	// write asynchronously
 	d.writeApi.WritePoint(p)
