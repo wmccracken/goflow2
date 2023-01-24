@@ -149,6 +149,13 @@ func (d *InfluxDbDriver) Send(key, data []byte) error {
 		//AddField("custom_bytes_4", fmsg["CustomBytes_4"].([]interface{})).
 		//AddField("custom_bytes_5", fmsg["CustomBytes_5"].([]interface{})).
 		SetTime(time.Unix(int64(fmsg["TimeReceived"].(float64)), 0))
+
+	if val, ok := fmsg["SrcCountry"]; ok {
+		p.AddField("src_country", val.(string))
+	}
+	if val, ok := fmsg["DstCountry"]; ok {
+		p.AddField("dst_country", val.(string))
+	}
 	// write asynchronously
 	d.writeApi.WritePoint(p)
 
