@@ -1,0 +1,12 @@
+[Unit]
+Description=GoFlow2-Enricher
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/goflow2
+WorkingDirectory=/usr/share/goflow2
+ExecStart=/usr/bin/goflow2 -transport.file.sep= -format=pb -format.protobuf.fixedlen=true | /usr/bin/goflow2-enricher $GOFLOW2_ENRICHER_ARGS
+
+[Install]
+WantedBy=multi-user.target

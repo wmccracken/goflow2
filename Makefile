@@ -23,6 +23,7 @@ DOCKER_CMD    ?= build
 DOCKER_SUFFIX ?= 
 
 OUTPUT := $(DIST_DIR)goflow2-$(VERSION_PKG)-$(GOOS)-$(ARCH)$(EXTENSION)
+OUTPUT_ENRICHER := $(DIST_DIR)goflow2-enricher-$(VERSION_PKG)-$(GOOS)-$(ARCH)$(EXTENSION)
 
 .PHONY: proto
 proto:
@@ -48,7 +49,8 @@ clean:
 
 .PHONY: build
 build: prepare
-	go build -ldflags $(LDFLAGS) -o $(OUTPUT) cmd/goflow2/main.go 
+	go build -ldflags $(LDFLAGS) -o $(OUTPUT) cmd/goflow2/main.go
+	go build -ldflags $(LDFLAGS) -o $(OUTPUT_ENRICHER) cmd/enricher/main.go
 
 .PHONY: docker
 docker:
@@ -97,8 +99,11 @@ package-deb: prepare
         --license "$(LICENSE)" \
         --package $(DIST_DIR) \
         $(OUTPUT)=/usr/bin/goflow2 \
+        $(OUTPUT_ENRICHER)=/usr/bin/goflow2-enricher \
         package/goflow2.service=/lib/systemd/system/goflow2.service \
-        package/goflow2.env=/etc/default/goflow2
+        package/goflow2-enricher.service=/usr/lib/systemd/system/goflow2-enricher.service \
+        package/goflow2.env=/etc/default/goflow2 \
+        package/goflow2.conf=/etc/goflow2.conf
 
 .PHONY: package-rpm
 package-rpm: prepare
@@ -110,8 +115,11 @@ package-rpm: prepare
         --license "$(LICENSE) "\
         --package $(DIST_DIR) \
         $(OUTPUT)=/usr/bin/goflow2 \
+        $(OUTPUT_ENRICHER)=/usr/bin/goflow2-enricher \
         package/goflow2.service=/lib/systemd/system/goflow2.service \
-        package/goflow2.env=/etc/default/goflow2
+        package/goflow2-enricher.service=/usr/lib/systemd/system/goflow2-enricher.service \
+        package/goflow2.env=/etc/default/goflow2 \
+        package/goflow2.conf=/etc/goflow2.conf
 
 .PHONY: package-arch
 package-arch: prepare
@@ -124,6 +132,8 @@ package-arch: prepare
         --package $(DIST_DIR) \
         --directories "/usr/share/goflow2" \
         $(OUTPUT)=/usr/bin/goflow2 \
+        $(OUTPUT_ENRICHER)=/usr/bin/goflow2-enricher \
         package/goflow2.service=/usr/lib/systemd/system/goflow2.service \
+        package/goflow2-enricher.service=/usr/lib/systemd/system/goflow2-enricher.service \
         package/goflow2.env=/etc/default/goflow2 \
         package/goflow2.conf=/etc/goflow2.conf
