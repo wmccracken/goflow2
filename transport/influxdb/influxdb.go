@@ -4,13 +4,14 @@ import (
 	"context"
 	"crypto/tls"
 	"encoding/json"
+	"strconv"
+	"time"
+
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"github.com/influxdata/influxdb-client-go/v2/api"
 	"github.com/jnovack/flag"
 	"github.com/netsampler/goflow2/transport"
 	log "github.com/sirupsen/logrus"
-	"strconv"
-	"time"
 )
 
 type InfluxDbDriver struct {
@@ -33,7 +34,7 @@ func (d *InfluxDbDriver) Prepare() error {
 	flag.StringVar(&d.influxBucket, "transport.influxdb.bucket", "", "InfluxDB bucket used for writing")
 	flag.BoolVar(&d.influxGZip, "transport.influxdb.gzip", true, "Use GZip compression")
 	flag.BoolVar(&d.influxTLSSkipVerify, "transport.influxdb.skiptlsverify", false, "Insecure TLS skip verify")
-	flag.BoolVar(&d.influxGZip, "transport.influxdb.log.errors", true, "Log InfluxDB write errors")
+	flag.BoolVar(&d.influxLogErrors, "transport.influxdb.log.errors", true, "Log InfluxDB write errors")
 
 	//TODO: Add retry parameters
 	return nil
