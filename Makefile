@@ -49,8 +49,8 @@ clean:
 
 .PHONY: build
 build: prepare
-	go build -ldflags $(LDFLAGS) -o $(OUTPUT) cmd/goflow2/main.go
-	go build -ldflags $(LDFLAGS) -o $(OUTPUT_ENRICHER) cmd/enricher/main.go
+	CGO_ENABLED=0 go build -ldflags $(LDFLAGS) -o $(OUTPUT) cmd/goflow2/main.go
+	CGO_ENABLED=0 go build -ldflags $(LDFLAGS) -o $(OUTPUT_ENRICHER) cmd/enricher/main.go
 
 .PHONY: docker
 docker:

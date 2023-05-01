@@ -4,13 +4,14 @@ import (
 	"context"
 	"crypto/tls"
 	"encoding/json"
+	"strconv"
+	"time"
+
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"github.com/influxdata/influxdb-client-go/v2/api"
 	"github.com/jnovack/flag"
 	"github.com/netsampler/goflow2/transport"
 	log "github.com/sirupsen/logrus"
-	"strconv"
-	"time"
 )
 
 type InfluxDbDriver struct {
@@ -83,6 +84,7 @@ func (d *InfluxDbDriver) Send(key, data []byte) error {
 		AddTag("sampler_address", fmsg["SamplerAddress"].(string)).
 		AddTag("src_addr", fmsg["SrcAddr"].(string)).
 		AddTag("dst_addr", fmsg["DstAddr"].(string)).
+		AddTag("proto", strconv.FormatInt(int64(fmsg["SrcPort"].(float64)), 10)).
 		AddTag("src_port", strconv.FormatInt(int64(fmsg["SrcPort"].(float64)), 10)).
 		AddTag("dst_port", strconv.FormatInt(int64(fmsg["DstPort"].(float64)), 10)).
 		AddTag("in_if", strconv.FormatInt(int64(fmsg["InIf"].(float64)), 10)).
@@ -98,7 +100,6 @@ func (d *InfluxDbDriver) Send(key, data []byte) error {
 		AddField("bytes", int64(fmsg["Bytes"].(float64))).
 		AddField("packets", int64(fmsg["Packets"].(float64))).
 		AddField("etype", int64(fmsg["Etype"].(float64))).
-		AddField("proto", int64(fmsg["Proto"].(float64))).
 		AddField("src_mac", fmsg["SrcMac"].(string)).
 		AddField("dst_mac", fmsg["DstMac"].(string)).
 		AddField("src_vlan", int64(fmsg["SrcVlan"].(float64))).
