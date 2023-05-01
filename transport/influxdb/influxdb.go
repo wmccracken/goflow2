@@ -84,7 +84,7 @@ func (d *InfluxDbDriver) Send(key, data []byte) error {
 		AddTag("sampler_address", fmsg["SamplerAddress"].(string)).
 		AddTag("src_addr", fmsg["SrcAddr"].(string)).
 		AddTag("dst_addr", fmsg["DstAddr"].(string)).
-		AddTag("proto", strconv.FormatInt(int64(fmsg["SrcPort"].(float64)), 10)).
+		AddTag("proto", strconv.FormatInt(int64(fmsg["proto"].(float64)), 10)).
 		AddTag("src_port", strconv.FormatInt(int64(fmsg["SrcPort"].(float64)), 10)).
 		AddTag("dst_port", strconv.FormatInt(int64(fmsg["DstPort"].(float64)), 10)).
 		AddTag("in_if", strconv.FormatInt(int64(fmsg["InIf"].(float64)), 10)).
